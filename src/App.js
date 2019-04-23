@@ -31,11 +31,16 @@ class WeatherDisplay extends Component {
     const WEATHER_DATA = this.state.weatherData;
     if (!WEATHER_DATA) return <div>Загрузка...</div>;
     const WEATHER = WEATHER_DATA.weather[0];
+    const DATE = new Date(WEATHER_DATA.dt * 1000).toLocaleTimeString(undefined, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
     const ICON_URL = "http://openweathermap.org/img/w/" + WEATHER.icon + ".png";
     return (
       <div>
         <h2>
-          <strong>{PLACES[this.props.activePlace].name}|{WEATHER.description.toUpperCase()}</strong>
+          <strong>{PLACES[this.props.activePlace].name}|{DATE}|{WEATHER.description.toUpperCase()}</strong>
           <img src={ICON_URL} alt={WEATHER_DATA.description} />
         </h2>
         <table class="table table-hover">
